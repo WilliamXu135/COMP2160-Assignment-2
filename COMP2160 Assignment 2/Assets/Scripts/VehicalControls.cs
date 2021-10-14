@@ -46,19 +46,15 @@ public class VehicalControls : MonoBehaviour
         accelerate = Input.GetAxis(InputAxes.Vertical);
         turning = Input.GetAxis(InputAxes.Horizontal);
 
-        RaycastHit hit;
         velocity = accelerate * force;
         rotate = turning * turningForce;
-        grounded = Physics.Raycast(rigidbodyComponent.position,
-             rigidbodyComponent.transform.TransformDirection(Vector3.down),
-             out hit, distanceToGround + clearanceError, layer) ;
-
-        Debug.Log(hit);
-
     }
 
     private void FixedUpdate()
     {
+        grounded = Physics.Raycast(rigidbodyComponent.position,
+             rigidbodyComponent.transform.TransformDirection(Vector3.down),
+             distanceToGround + clearanceError, layer);
 
         if (grounded)
         {
